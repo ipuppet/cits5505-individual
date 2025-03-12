@@ -1,0 +1,81 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #222;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.box {
+    padding: 0;
+    margin: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    background-color: #333;
+    background-size: cover;
+    background-position: center center;
+}
+
+.box-content {
+    position: relative;
+    text-align: center;
+    transition: all 0.5s ease;
+    transform: scale(0.9);
+    white-space: nowrap;
+}
+
+.box-content a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 5vw;
+}
+
+.left {
+    background-image: linear-gradient(rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.7)), url("../images/left-bg.jpeg");
+}
+
+.right {
+    background-image: linear-gradient(rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.7)), url("../images/right-bg.jpg");
+}
+
+/* Hover effects */
+.left:hover {
+    width: 90%;
+    background-position: 45% center;
+    filter: brightness(1.2);
+}
+
+.right:hover {
+    width: 90%;
+    background-position: 65% center;
+    filter: brightness(1.2);
+}
+
+.left:hover + .right {
+    filter: brightness(0.7);
+}
+
+.right:hover ~ .left {
+    filter: brightness(0.7);
+}
+
+.box:hover .box-content {
+    transform: scale(1.1);
+}
