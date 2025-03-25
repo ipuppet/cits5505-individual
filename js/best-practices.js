@@ -1,45 +1,84 @@
+// Sources list
+// HTML: https://www.w3schools.com/html/html5_syntax.asp
+// CSS: https://kinsta.com/blog/css-best-practices/
+// JavaScript: https://www.w3schools.com/js/js_best_practices.asp
 const bestPractices = {
-    html: [
+    HTML: [
         {
-            title: "Use semantic HTML",
-            description:
-                "Use semantic HTML elements to give meaning to the content. This will help search engines to understand the content and improve the accessibility of the website."
+            title: "Use lowercase element names",
+            description: "Mixing uppercase and lowercase names looks inconsistent, and lowercase is easier to type."
         },
         {
-            title: "Use alt text for images",
-            description:
-                "Add alt text to images to describe the content of the image. This will help visually impaired users to understand the content of the image."
+            title: "Close all HTML elements",
+            description: "Close all HTML elements, even if they are optional.<br/>This improves code readability."
         },
         {
-            title: "Use ARIA roles",
+            title: "Always quote attribute values",
             description:
-                "Use ARIA roles to improve the accessibility of the website. ARIA roles help screen readers to understand the content of the website."
+                "Always quote attribute values to enhance readability and avoid errors.<br/>Quotes are mandatory if the value contains spaces."
+        },
+        {
+            title: "Manage blank lines and indentation",
+            description:
+                "Avoid adding unnecessary blank lines, spaces, or indentation.<br/>Use blank lines to separate large or logical code blocks, and use two spaces for indentation.<br/>Avoid using the tab key."
+        },
+        {
+            title: "Never skip the <title> element",
+            description:
+                "The <code>&lt;title&gt;</code> element is required in HTML.<br/>It is crucial for search engine optimization (SEO) as it influences how search engines rank pages in search results."
         }
     ],
-    css: [
+    CSS: [
         {
-            title: "Use a CSS reset",
-            description:
-                "Use a CSS reset to remove default browser styling. This will help to create a consistent look and feel across different browsers."
+            title: "Use line breaks liberally",
+            description: "Using line breaks improves readability and makes the code easier to understand and maintain."
         },
         {
-            title: "Use a CSS preprocessor",
+            title: "Use separate stylesheets for larger projects",
             description:
-                "Use a CSS preprocessor like Sass or Less to write maintainable and scalable CSS code. CSS preprocessors provide features like variables, nesting, and mixins."
+                "For large websites, using multiple stylesheets helps organize styles for different sections, making the code easier to manage."
+        },
+        {
+            title: "Consider using a CSS framework",
+            description:
+                "CSS frameworks can speed up development for large projects, reduce bugs, and provide standardization, especially in team environments."
+        },
+        {
+            title: "Start with a CSS reset",
+            description: "A CSS reset ensures consistent rendering across browsers and minimizes inconsistencies."
+        },
+        {
+            title: "Use CSS shorthand",
+            description:
+                "CSS shorthand reduces code size by combining multiple styles into a single line, improving readability and efficiency."
+        }
+    ],
+    JavaScript: [
+        {
+            title: "Avoid Using eval()",
+            description: `The eval() function is used to run text as code. In almost all cases, it should not be necessary to use it.<br/>
+                Because it allows arbitrary code to be run, it also represents a security problem.`
+        },
+        {
+            title: "Use === for comparison",
+            description:
+                "The strict equality operator (===) checks both the data type and value, making it the best practice for comparisons."
+        },
+        {
+            title: "Beware of Automatic Type Conversions",
+            description: `Beware that numbers can accidentally be converted to strings or NaN (Not a Number).<br/>
+                Subtracting a string from a string, does not generate an error but returns NaN (Not a Number)`
+        },
+        {
+            title: "Declare Arrays with const",
+            description: "Declaring arrays with const will prevent any accidential change of type."
+        },
+        {
+            title: "Avoid global variables",
+            description:
+                "Global variables can lead to conflicts and make the code harder to maintain and debug.<br/>Limit their use whenever possible."
         }
     ]
-}
-
-const appendAlert = (message, type) => {
-    const wrapper = document.createElement("div")
-    wrapper.innerHTML = [
-        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-        `   <div>${message}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-        "</div>"
-    ].join("")
-    const alertPlaceholder = document.getElementById("liveAlertPlaceholder")
-    alertPlaceholder.append(wrapper)
 }
 
 class Status {
@@ -97,7 +136,7 @@ class BestPractices {
 
         const cardText = document.createElement("p")
         cardText.className = "card-text"
-        cardText.textContent = item.description
+        cardText.innerHTML = item.description // allow HTML content because this is a trusted source (hardcoded)
 
         const checkIcon = document.createElement("i")
         checkIcon.className = "bi bi-check2-circle float-end"
@@ -136,7 +175,7 @@ class BestPractices {
             const navItem = document.createElement("li")
             const button = document.createElement("button")
             button.className = i === 0 ? "nav-link active" : "nav-link"
-            button.textContent = key.toUpperCase()
+            button.textContent = key
             button.dataset.bsToggle = "tab"
             button.dataset.bsTarget = `#${key}`
             navItem.appendChild(button)
@@ -154,10 +193,24 @@ class BestPractices {
     }
 }
 
-async function fetchImage() {
+const appendAlert = (message, type) => {
+    const wrapper = document.createElement("div")
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        "</div>"
+    ].join("")
+    const alertPlaceholder = document.getElementById("liveAlertPlaceholder")
+    alertPlaceholder.append(wrapper)
+}
+
+async function fetchImage(imageElem) {
+    // Image API From: https://docs.waifu.im
     const baseUrl = "https://api.waifu.im"
     const params = {
-        included_tags: ["raiden-shogun", "maid"],
+        is_nsfw: false,
+        included_tags: ["kamisato-ayaka"],
         height: ">=2000"
     }
     const queryParams = new URLSearchParams()
@@ -172,17 +225,45 @@ async function fetchImage() {
     }
     const requestUrl = `${baseUrl}/search?${queryParams.toString()}`
 
-    try {
-        const response = await fetch(requestUrl)
-        if (response.ok) {
-            const image = await response.json().images[0]
-        }
-    } catch (error) {
-        console.error(error)
-        appendAlert(error, "danger")
+    const parentElem = imageElem.parentElement
+    const spinner = document.createElement("div")
+    spinner.className = "spinner-border"
+    spinner.setAttribute("role", "status")
+    spinner.innerHTML = '<span class="visually-hidden">Loading...</span>'
+    parentElem.appendChild(spinner)
+    imageElem.addEventListener("load", () => {
+        parentElem.removeChild(spinner)
+    })
+    imageElem.style.display = "none"
+
+    const response = await fetch(requestUrl)
+    if (response.ok) {
+        const resp = await response.json()
+        const image = resp.images[0]
+        imageElem.src = image.url
+        imageElem.alt = `From: ${image.artist.name}`
+        imageElem.style.display = "block"
+    } else {
+        throw new Error("Failed to fetch image: " + response.statusText)
     }
 }
-function updateProgress() {
+
+function showStar() {
+    const starIcon = document.querySelector("#starIcon")
+    starIcon.style.display = "inline-block"
+}
+
+async function showPrize() {
+    const prizeModal = new bootstrap.Modal(document.getElementById("prizeModal"), {})
+    prizeModal.show()
+    try {
+        await fetchImage(document.querySelector("#prizeImage"))
+    } catch (error) {
+        throw error
+    }
+}
+
+async function updateProgress() {
     const total = BestPractices.shared.status.length
     const current = BestPractices.shared.status.current
     const progress = current / total
@@ -196,15 +277,23 @@ function updateProgress() {
     // update progress ring
     const progressRing = document.querySelector(".progress-ring")
     const progressText = document.querySelector(".progress-text")
-
     progressRing.style.transition = "stroke-dashoffset 0.5s ease, stroke 0.5s ease"
     progressRing.style.strokeDashoffset = offset
     progressRing.style.stroke = color
-
     progressText.textContent = `${current}/${total}`
 
+    if (localStorage.getItem("isPrizeClaimed") === "true") {
+        showStar()
+        return
+    }
     if (progress >= 0.8) {
-        fetchImage()
+        try {
+            localStorage.setItem("isPrizeClaimed", "true")
+            showPrize()
+            showStar()
+        } catch (error) {
+            appendAlert(error, "danger")
+        }
     }
 }
 

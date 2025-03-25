@@ -25,8 +25,16 @@
     <body>
         <div class="container">
             <div id="liveAlertPlaceholder"></div>
+            <div class="row">
+                <div class="col">
+                    <h1>Best Practices</h1>
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <i class="bi bi-star-fill star" id="starIcon" onclick="showPrize()"></i>
+                </div>
+            </div>
             <div class="nav nav-tabs"></div>
-            <div class="tab-content"></div>
+            <div class="tab-content mb-3"></div>
             <div class="progress-circle mt-3">
                 <svg viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="45" stroke="#e9ecef" stroke-width="10" fill="none" />
@@ -45,6 +53,24 @@
                     </g>
                     <text class="progress-text" x="50" y="50">0/0</text>
                 </svg>
+            </div>
+
+            <div class="modal" tabindex="-1" id="prizeModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Success!!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Here is the prize picture!</p>
+                            <img id="prizeImage" class="img-fluid" alt="prize picture" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
