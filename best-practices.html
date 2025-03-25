@@ -15,20 +15,36 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
         <link rel="stylesheet" href="./css/best-practices.css" />
         <script src="./js/best-practices.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="box left">
-                <div class="box-content">
-                    <a href="./best-practices.html">Best Practices</a>
-                </div>
-            </div>
-            <div class="box right">
-                <div class="box-content">
-                    <a href="./cv.html">Curriculum Vitae</a>
-                </div>
+        <div class="container">
+            <div id="liveAlertPlaceholder"></div>
+            <div class="nav nav-tabs"></div>
+            <div class="tab-content"></div>
+            <div class="progress-circle mt-3">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="#e9ecef" stroke-width="10" fill="none" />
+                    <g transform="rotate(-90 50 50)">
+                        <circle
+                            class="progress-ring"
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            stroke="red"
+                            stroke-width="10"
+                            fill="none"
+                            stroke-dasharray="283"
+                            stroke-dashoffset="283"
+                        />
+                    </g>
+                    <text class="progress-text" x="50" y="50">0/0</text>
+                </svg>
             </div>
         </div>
     </body>

@@ -1,0 +1,13 @@
+.progress-circle {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+}
+.progress-circle text {
+    font-size: 1.5em;
+    fill: #333;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
