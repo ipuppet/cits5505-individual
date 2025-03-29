@@ -193,7 +193,7 @@ class BestPractices {
     }
 }
 
-const appendAlert = (message, type) => {
+function appendAlert(message, type) {
     const wrapper = document.createElement("div")
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -203,6 +203,15 @@ const appendAlert = (message, type) => {
     ].join("")
     const alertPlaceholder = document.getElementById("liveAlertPlaceholder")
     alertPlaceholder.append(wrapper)
+}
+
+function initTooltips() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    tooltipList.forEach(tooltip => {
+        tooltip.show()
+        setTimeout(() => tooltip.hide(), 2000)
+    })
 }
 
 async function fetchImage(imageElem) {
@@ -299,5 +308,6 @@ async function updateProgress() {
 
 window.onload = () => {
     BestPractices.shared.render()
+    initTooltips()
     updateProgress()
 }
