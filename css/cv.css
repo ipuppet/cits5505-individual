@@ -1,0 +1,66 @@
+.navbar {
+    width: 100vw;
+    padding: 30px;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+.top-block {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.7)), url("../images/right-bg.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.top-block img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    margin-top: 20vh;
+    margin-bottom: 30px;
+}
+
+.top-block-content {
+    color: white;
+    max-width: 40%;
+    margin-bottom: 30px;
+}
+
+.block-header {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.container .card {
+    margin-bottom: 20px;
+}

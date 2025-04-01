@@ -1,0 +1,41 @@
+.arrows-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid #cccccc;
+    border-bottom: 2px solid #cccccc;
+    transform: rotate(45deg);
+    animation: bounce 2s infinite;
+}
+
+.arrow:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.arrow:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.arrow:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+@keyframes bounce {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-10px, -10px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(10px, 10px);
+    }
+}
