@@ -266,7 +266,12 @@ async function showPrize() {
     const prizeModal = new bootstrap.Modal(document.getElementById("prizeModal"), {})
     prizeModal.show()
     try {
-        await fetchImage(document.querySelector("#prizeImage"))
+        const imgContainer = document.querySelector("#prizeImage")
+        imgContainer.innerHTML = ""
+        const img = document.createElement("img")
+        img.className = "img-fluid"
+        imgContainer.appendChild(img)
+        await fetchImage(img)
     } catch (error) {
         throw error
     }
