@@ -2,7 +2,7 @@
 // HTML: https://www.w3schools.com/html/html5_syntax.asp
 // CSS: https://kinsta.com/blog/css-best-practices/
 // JavaScript: https://www.w3schools.com/js/js_best_practices.asp
-// This simulates data from a API
+// This simulates data from an API
 const bestPractices = {
     HTML: [
         {
