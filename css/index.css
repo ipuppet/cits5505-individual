@@ -47,6 +47,7 @@ body {
     font-size: 5vw;
 }
 
+/* Background images with dark overlay */
 .left {
     background-image: linear-gradient(rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.7)), url("../images/left-bg.jpeg");
 }

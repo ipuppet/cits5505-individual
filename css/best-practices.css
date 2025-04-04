@@ -16,9 +16,9 @@
 .star {
     cursor: pointer;
     font-size: 1.6em;
-    display: none; /* Hide the star */
+    display: none; /* Hide the star at first */
     background: linear-gradient(45deg, #ff9a00, #ffd700, #ff9a00);
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
     background-clip: text;
     color: transparent;
 }

@@ -26,6 +26,7 @@
     animation-delay: -0.4s;
 }
 
+/* Arrow animation */
 @keyframes bounce {
     0% {
         opacity: 0;

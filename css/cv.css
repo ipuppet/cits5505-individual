@@ -15,7 +15,7 @@
 .navbar.scrolled {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -29,6 +29,7 @@
     padding: 0;
 }
 
+/* First-child is the logo */
 .nav-links li:first-child {
     margin-right: auto;
     display: none;
@@ -85,6 +86,7 @@
     margin-right: 2px;
 }
 
+/* Add a scroll margin to contact card */
 #contact {
     scroll-margin-top: 95px;
 }

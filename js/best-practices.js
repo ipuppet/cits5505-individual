@@ -2,6 +2,7 @@
 // HTML: https://www.w3schools.com/html/html5_syntax.asp
 // CSS: https://kinsta.com/blog/css-best-practices/
 // JavaScript: https://www.w3schools.com/js/js_best_practices.asp
+// This simulates data from a API
 const bestPractices = {
     HTML: [
         {
@@ -81,6 +82,11 @@ const bestPractices = {
     ]
 }
 
+/**
+ * Class to manage the status of best practices
+ * It uses localStorage to persist the status across sessions.
+ * The status is stored as a JSON object with keys as practice IDs and values as 0 or 1.
+ */
 class Status {
     constructor() {
         this.status = JSON.parse(localStorage.getItem("status")) ?? {}
@@ -104,12 +110,24 @@ class Status {
     }
 }
 
+/**
+ * Class to manage best practices
+ * It uses the Status class to manage the status of each practice.
+ * It creates a card for each practice and appends it to the DOM.
+ */
 class BestPractices {
-    static shared = new BestPractices(bestPractices)
+    static shared = new BestPractices(bestPractices) // Singleton instance
 
+    /**
+     * @param {Object} bestPractices - The best practices data
+     * @param {Object} bestPractices.HTML - The HTML best practices
+     * @param {Object} bestPractices.CSS - The CSS best practices
+     * @param {Object} bestPractices.JavaScript - The JavaScript best practices
+     */
     constructor(bestPractices) {
         this.data = bestPractices
         this.status = new Status()
+        // Initialize status for each practice if not already set
         if (this.status.length === 0) {
             Object.keys(this.data).forEach(key => {
                 this.data[key].forEach(item => {
@@ -136,7 +154,7 @@ class BestPractices {
 
         const cardText = document.createElement("p")
         cardText.className = "card-text"
-        cardText.innerHTML = item.description // allow HTML content because this is a trusted source (hardcoded)
+        cardText.innerHTML = item.description // allow HTML content because this is a trusted source
 
         const checkIcon = document.createElement("i")
         checkIcon.className = "bi bi-check2-circle float-end"
@@ -167,6 +185,10 @@ class BestPractices {
         return card
     }
 
+    /**
+     * Render the best practices in the DOM
+     * It creates a tab for each category (HTML, CSS, JavaScript) and appends the cards to the corresponding tab content.
+     */
     render() {
         const nav = document.querySelector(".nav")
         const tabContent = document.querySelector(".tab-content")
@@ -193,6 +215,11 @@ class BestPractices {
     }
 }
 
+/**
+ * Append an alert message to the alert placeholder
+ * @param {string} message - The message to display
+ * @param {string} type - The type of alert (success, danger, etc.)
+ */
 function appendAlert(message, type) {
     const wrapper = document.createElement("div")
     wrapper.innerHTML = [
@@ -234,6 +261,7 @@ async function fetchImage(imageElem) {
     }
     const requestUrl = `${baseUrl}/search?${queryParams.toString()}`
 
+    // Show spinner while loading
     const parentElem = imageElem.parentElement
     const spinner = document.createElement("div")
     spinner.className = "spinner-border"
@@ -257,11 +285,18 @@ async function fetchImage(imageElem) {
     }
 }
 
+/**
+ * Show the star icon in the navbar
+ * This function is called when the user has completed 80% of the best practices.
+ */
 function showStar() {
     const starIcon = document.querySelector("#starIcon")
     starIcon.style.display = "inline-block"
 }
 
+/**
+ * Show the prize modal
+ */
 async function showPrize() {
     const prizeModal = new bootstrap.Modal(document.getElementById("prizeModal"), {})
     prizeModal.show()
@@ -277,6 +312,10 @@ async function showPrize() {
     }
 }
 
+/**
+ * Update the progress ring and text
+ * This function is called when the user checks or unchecks a practice.
+ */
 async function updateProgress() {
     const total = BestPractices.shared.status.length
     const current = BestPractices.shared.status.current
